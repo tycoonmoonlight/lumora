@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumora Token (LMR) - Illuminating the Future of DeFi</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-orange: #FF6B35;
+            --secondary-yellow: #F7931E;
+            --dark-blue: #1A1D29;
+            --light-blue: #2A3F5F;
+            --accent-gold: #FFD700;
+            --text-light: #E8E8E8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        .solar-bg {
+            background: radial-gradient(circle at 20% 30%, rgba(255, 107, 53, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(247, 147, 30, 0.3) 0%, transparent 50%),
+                        linear-gradient(135deg, var(--dark-blue) 0%, var(--light-blue) 100%);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .solar-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 215, 0, 0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 107, 53, 0.3), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(247, 147, 30, 0.3), transparent);
+            background-size: 100px 100px;
+            animation: twinkle 3s ease-in-out infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.5); }
+            50% { box-shadow: 0 0 30px rgba(247, 147, 30, 0.8), 0 0 40px rgba(255, 107, 53, 0.3); }
+            100% { box-shadow: 0 0 20px rgba(255, 107, 53, 0.5); }
+        }
+
+        .navbar {
+            background: rgba(26, 29, 41, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 107, 53, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-link {
+            color: var(--text-light) !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-orange) !important;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .btn-solar {
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+            border: none;
+            padding: 15px 40px;
+            font-weight: bold;
+            border-radius: 50px;
+            color: white;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        .btn-solar:hover {
+            transform: translateY(-3px);
+            color: white;
+        }
+
+        .countdown-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .countdown-item {
+            text-align: center;
+            margin: 0 1rem;
+        }
+
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        .section {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .card-solar {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card-solar:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.2);
+        }
+
+        .tokenomics-chart {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary-orange);
+        }
+
+        .roadmap-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .roadmap-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow));
+            border-radius: 50%;
+            border: 3px solid var(--dark-blue);
+        }
+
+        .roadmap-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--primary-orange), transparent);
+        }
+
+        .roadmap-item:last-child::after {
+            display: none;
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .team-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: linear-gradient(45deg, var(--primary-orange), var(--secondary-yellow)) border-box;
+            transition: all 0.3s ease;
+        }
+
+        .team-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .team-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.5);
+        }
+
+        .audit-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .audit-badge:hover {
+            transform: scale(1.05);
+        }
+
+        .newsletter-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 10px;
+            color: var(--text-light);
+            padding: 15px;
+        }
+
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 0.2rem rgba(255, 107, 53, 0.25);
+            color: var(--text-light);
+        }
+
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-orange);
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background: rgba(26, 29, 41, 0.95);
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255, 107, 53, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .countdown-item {
+                margin: 0.5rem;
+            }
+            
+            .countdown-number {
+                font-size: 2rem;
+            }
+
+            .team-avatar {
+                width: 120px;
+                height: 120px;
+            }
+        }
+        .watermark {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        color: rgba(0, 0, 0, 0.15); /* Light and transparent */
+        font-size: 14px;
+        font-weight: bold;
+        pointer-events: none; /* So it doesn't interfere with clicks */
+        z-index: 9999;
+        user-select: none; /* Prevent text selection */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-sun"></i> Lumora
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tokenomics">Tokenomics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#roadmap">Roadmap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#audit">Audit</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#whitepaper">Whitepaper</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section solar-bg">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h1 class="hero-title">Lumora Token</h1>
+                    <h2 class="hero-subtitle">Illuminating the Future of Sustainable DeFi</h2>
+                    <p class="lead mb-4">
+                        Join the revolution in decentralized finance powered by renewable energy. 
+                        Lumora Token (LMR) combines cutting-edge blockchain technology with 
+                        environmental sustainability.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#whitepaper" class="btn btn-solar">
+                            <i class="fas fa-file-alt me-2"></i>Read Whitepaper
+                        </a>
+                        <a href="#tokenomics" class="btn btn-outline-light btn-lg">
+                            <i class="fas fa-chart-pie me-2"></i>View Tokenomics
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="countdown-container">
+                        <h3 class="text-center mb-4">Launch Countdown</h3>
+                        <div class="row justify-content-center" id="countdown">
+                            <div class="col-3 countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">Days</span>
+                            </div>
+                            <div class="col-3 countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">Hours</span>
+                            </div>
+                            <div class="col-3 countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">Minutes</span>
+                            </div>
+                            <div class="col-3 countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">Seconds</span>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <p><strong>Launch Date:</strong> September 15, 2025</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="section">
+        <div class="container">
+            <h2 class="section-title">Tokenomics</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card-solar">
+                        <h4 class="mb-4 text-center">Total Supply: 1,000,000,000 LMR</h4>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="tokenomics-chart">
+                                    <h5><i class="fas fa-users text-warning me-2"></i>Public Sale - 40%</h5>
+                                    <p>400,000,000 LMR available for public purchase</p>
+                                </div>
+                                <div class="tokenomics-chart">
+                                    <h5><i class="fas fa-seedling text-success me-2"></i>Development - 20%</h5>
+                                    <p>200,000,000 LMR for platform development</p>
+                                </div>
+                                <div class="tokenomics-chart">
+                                    <h5><i class="fas fa-gift text-info me-2"></i>Marketing - 15%</h5>
+                                    <p>150,000,000 LMR for marketing and partnerships</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="tokenomics-chart">
+                                    <h5><i class="fas fa-lock text-danger me-2"></i>Team - 15%</h5>
+                                    <p>150,000,000 LMR locked for 2 years</p>
+                                </div>
+                                <div class="tokenomics-chart">
+                                    <h5><i class="fas fa-coins text-primary me-2"></i>Staking Rewards - 10%</h5>
+                                    <p>100,000,000 LMR for staking incentives</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap" class="section">
+        <div class="container">
+            <h2 class="section-title">Roadmap</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="roadmap-item">
+                        <h4>Q3 2025 - Genesis</h4>
+                        <ul>
+                            <li>Token Launch & DEX Listing</li>
+                            <li>Smart Contract Audit Completion</li>
+                            <li>Community Building Initiative</li>
+                            <li>Staking Platform Beta Release</li>
+                        </ul>
+                    </div>
+                    <div class="roadmap-item">
+                        <h4>Q4 2025 - Expansion</h4>
+                        <ul>
+                            <li>Major CEX Listings</li>
+                            <li>Mobile App Launch</li>
+                            <li>Partnership with Solar Energy Providers</li>
+                            <li>Yield Farming Pools</li>
+                        </ul>
+                    </div>
+                    <div class="roadmap-item">
+                        <h4>Q1 2026 - Innovation</h4>
+                        <ul>
+                            <li>NFT Marketplace Integration</li>
+                            <li>Cross-chain Bridge Implementation</li>
+                            <li>DAO Governance Launch</li>
+                            <li>Carbon Credit Trading Platform</li>
+                        </ul>
+                    </div>
+                    <div class="roadmap-item">
+                        <h4>Q2 2026 - Ecosystem</h4>
+                        <ul>
+                            <li>DeFi Lending Protocol</li>
+                            <li>Renewable Energy Certificates</li>
+                            <li>Global Partnership Network</li>
+                            <li>Metaverse Integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="team1.jpg" alt="Alex Chen">
+                        </div>
+                        <h5>Alex Chen</h5>
+                        <p class="text-muted">CEO & Founder</p>
+                        <p>Former Tesla engineer with 10+ years in renewable energy and blockchain technology.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="team2.jpg" alt="Sarah Johnson">
+                        </div>
+                        <h5>Sarah Johnson</h5>
+                        <p class="text-muted">CTO</p>
+                        <p>Ex-Ethereum developer with expertise in smart contracts and DeFi protocols.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="team3.jpg" alt="Michael Rodriguez">
+                        </div>
+                        <h5>Michael Rodriguez</h5>
+                        <p class="text-muted">CFO</p>
+                        <p>Former Goldman Sachs analyst specializing in sustainable finance and tokenomics.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-member">
+                        <div class="team-avatar">
+                            <img src="team4.jpg" alt="Emma Thompson">
+                        </div>
+                        <h5>Emma Thompson</h5>
+                        <p class="text-muted">CMO</p>
+                        <p>Marketing veteran with successful launches in crypto and clean energy sectors.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audit Section -->
+    <section id="audit" class="section">
+        <div class="container">
+            <h2 class="section-title">Smart Contract Audits</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <p class="lead mb-4">
+                        Security is our top priority. Our smart contracts have been audited by leading blockchain security firms.
+                    </p>
+                    <div class="audit-badge">
+                        <i class="fas fa-shield-alt me-2"></i>CertiK Audit - Completed
+                    </div>
+                    <div class="audit-badge">
+                        <i class="fas fa-check-circle me-2"></i>Quantstamp Verified
+                    </div>
+                    <div class="audit-badge">
+                        <i class="fas fa-lock me-2"></i>ConsenSys Diligence Approved
+                    </div>
+                    <div class="mt-4">
+                        <a href="#" class="btn btn-outline-light me-3">
+                            <i class="fas fa-download me-2"></i>Download Audit Report
+                        </a>
+                        <a href="#" class="btn btn-outline-light">
+                            <i class="fas fa-external-link-alt me-2"></i>View on Website
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Whitepaper Section -->
+    <section id="whitepaper" class="section">
+        <div class="container">
+            <h2 class="section-title">Whitepaper</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="card-solar text-center">
+                        <i class="fas fa-file-pdf fa-5x text-warning mb-4"></i>
+                        <h4>Lumora Token Whitepaper</h4>
+                        <p class="lead">
+                            Comprehensive technical documentation covering our vision, technology, 
+                            tokenomics, and roadmap for the future of sustainable DeFi.
+                        </p>
+                        <div class="mt-4">
+                            <a href="#" class="btn btn-solar me-3">
+                                <i class="fas fa-download me-2"></i>Download PDF
+                            </a>
+                            <a href="#" class="btn btn-outline-light">
+                                <i class="fas fa-eye me-2"></i>Read Online
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mx-auto">
+                    <div class="newsletter-form">
+                        <h3 class="text-center mb-4">Stay Updated</h3>
+                        <p class="text-center mb-4">
+                            Subscribe to our newsletter for the latest updates, announcements, and exclusive insights.
+                        </p>
+                        <form id="newsletterForm">
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Enter your email address" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-solar">
+                                    <i class="fas fa-paper-plane me-2"></i>Subscribe Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h5><i class="fas fa-sun me-2"></i>Lumora Token</h5>
+                    <p>Illuminating the future of sustainable decentralized finance through innovation and environmental consciousness.</p>
+                </div>
+                <div class="col-lg-6">
+                    <h6>Connect With Us</h6>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                        <a href="#"><i class="fab fa-medium"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-reddit"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p>© 2025 Lumora Token. All rights reserved. | <a href="#" class="text-decoration-none">Privacy Policy</a> | <a href="#" class="text-decoration-none">Terms of Service</a></p>
+                </div>
+            </div>
+        </div>
+       
+    </footer>
+    <div class="watermark">© Dr. Moonlight</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Countdown Timer
+        function updateCountdown() {
+            // Set the launch date to September 15, 2025, 12:00:00 UTC
+            const launchDate = new Date('2025-09-15T12:00:00Z').getTime();
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            if (distance > 0) {
+                // Calculate days, hours, minutes, and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update the DOM with zero-padded values
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                // Display launched message if the countdown is complete
+                document.getElementById('countdown').innerHTML = '<div class="col-12 text-center"><h3>🚀 LAUNCHED! 🚀</h3></div>';
+            }
+        }
+
+        // Initial call to set the countdown immediately
+        updateCountdown();
+        // Update countdown every second
+        setInterval(updateCountdown, 1000);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Newsletter form submission
+        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            
+            // Simple validation
+            if (email) {
+                alert('Thank you for subscribing! You\'ll receive updates about Lumora Token at ' + email);
+                this.reset();
+            }
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(26, 29, 41, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(26, 29, 41, 0.95)';
+            }
+        });
+
+        // Add floating animation to cards
+        const cards = document.querySelectorAll('.card-solar');
+        cards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'all 0.6s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
